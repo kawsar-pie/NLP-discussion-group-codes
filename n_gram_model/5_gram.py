@@ -1,6 +1,6 @@
 from n_gram import NGramLanguageModel
 
-bigram_model = NGramLanguageModel(n=2)
+bigram_model = NGramLanguageModel(n=5)
 # corpus = ["My name is Kawsar", "I am a very good boy",
 #           "but my mother says I am a very bad boy", "What can I do now?"]
 corpus = [

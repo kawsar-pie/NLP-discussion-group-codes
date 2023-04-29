@@ -47,9 +47,9 @@ class NGramLanguageModel:
             choices = [(ngram[-1], self.counts[ngram]) for ngram in self.counts if ngram[:-1] == context]
             if not choices:
                 break
-            # total_count = sum(count for word, count in choices)
-            # probs = [(word, count/total_count) for word, count in choices]
-            probs = [(word, self.score(prefix)) for word, count in choices]
+            total_count = sum(count for word, count in choices)
+            probs = [(word, count/total_count) for word, count in choices]
+            # probs = [(word, self.score(word)) for word, count in choices]
             chosen_word = max(probs, key=lambda x: x[1])[0]
             words.append(chosen_word)
         return ' '.join(words)
