@@ -1,5 +1,7 @@
 from collections import defaultdict
 import math
+
+
 class NGramLanguageModel:
     def __init__(self, n):
         self.n = n
@@ -44,7 +46,8 @@ class NGramLanguageModel:
             context = tuple(words[-(self.n-1):])
             if context not in self.context_counts:
                 break
-            choices = [(ngram[-1], self.counts[ngram]) for ngram in self.counts if ngram[:-1] == context]
+            choices = [(ngram[-1], self.counts[ngram])
+                       for ngram in self.counts if ngram[:-1] == context]
             if not choices:
                 break
             total_count = sum(count for word, count in choices)
@@ -54,4 +57,19 @@ class NGramLanguageModel:
             words.append(chosen_word)
         return ' '.join(words)
 
-    
+    def perplexity(self, corpus):
+        corpus = "".join(corpus)
+        probability_product = 1
+        tokens = corpus.split()
+        for i in range(self.n-1, len(tokens)):
+            ngram = tuple(tokens[i-self.n+1:i+1])
+            context = ngram[:-1]
+            count = self.counts[ngram]
+            context_count = self.context_counts[context]
+            if context_count != 0:
+                probability = count / context_count
+            else:
+                probability = 0
+            probability_product *= probability
+        perplexity = pow(probability_product, -1/len(tokens))
+        return int(perplexity)

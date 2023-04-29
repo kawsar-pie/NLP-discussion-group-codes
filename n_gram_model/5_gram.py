@@ -1,9 +1,9 @@
 from n_gram import NGramLanguageModel
 
-bigram_model = NGramLanguageModel(n=5)
+five_gram_model = NGramLanguageModel(n=5)
 # corpus = ["My name is Kawsar", "I am a very good boy",
 #           "but my mother says I am a very bad boy", "What can I do now?"]
-corpus = [
+train_corpus = [
     "Python finds extensive use in scientific computing.",
     "Raspberry Pi sees frequent use in embedded systems.",
     "Git is a common choice for version control in software development.",
@@ -105,10 +105,13 @@ corpus = [
     "React Native is a popular framework used for building native mobile applications using JavaScript.",
     "Swift is a powerful and intuitive programming language used for developing apps for Apple platforms."]
 
-bigram_model.train(corpus)
+five_gram_model.train(train_corpus)
 # returns a log probability
-score = bigram_model.score("C++ is a high-level")
+score = five_gram_model.score("C++ is a high-level")
 print(score)
 
-generated_text = bigram_model.predict("C++ is a high-level", max_length=100)
+generated_text = five_gram_model.predict("C++ is a high-level", max_length=100)
 print(generated_text)
+
+perplexity = five_gram_model.perplexity(["Git is a common choice for version control in software development."])
+print(perplexity)

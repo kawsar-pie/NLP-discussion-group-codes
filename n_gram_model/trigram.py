@@ -1,9 +1,9 @@
 from n_gram import NGramLanguageModel
 
-bigram_model = NGramLanguageModel(n=3)
+trigram_model = NGramLanguageModel(n=3)
 # corpus = ["My name is Kawsar", "I am a very good boy",
 #           "but my mother says I am a very bad boy", "What can I do now?"]
-corpus = [
+train_corpus = [
     "Python finds extensive use in scientific computing.",
     "Raspberry Pi sees frequent use in embedded systems.",
     "Git is a common choice for version control in software development.",
@@ -104,11 +104,14 @@ corpus = [
     "Ruby on Rails is a popular web development framework built with the Ruby programming language.",
     "React Native is a popular framework used for building native mobile applications using JavaScript.",
     "Swift is a powerful and intuitive programming language used for developing apps for Apple platforms."]
-
-bigram_model.train(corpus)
+test_corpus = "C++ is a high-level"
+trigram_model.train(train_corpus)
 # returns a log probability
-score = bigram_model.score("C++ is a high-level")
+score = trigram_model.score(test_corpus)
 print(score)
 
-generated_text = bigram_model.predict("C++ is a high-level", max_length=100)
+generated_text = trigram_model.predict(test_corpus, max_length=100)
 print(generated_text)
+
+perplexity = trigram_model.perplexity(["Git is a common choice for version control in software development."])
+print(perplexity)
