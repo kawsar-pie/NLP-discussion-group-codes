@@ -87,3 +87,4 @@ class Neural_Net:
         predictions = A > 0.5
 
         return predictions
+    
