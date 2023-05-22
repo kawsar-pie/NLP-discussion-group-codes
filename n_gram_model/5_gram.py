@@ -110,8 +110,9 @@ five_gram_model.train(train_corpus)
 score = five_gram_model.score("C++ is a high-level")
 print(score)
 
-generated_text = five_gram_model.predict("C++ is a high-level", max_length=100)
+generated_text = five_gram_model.predict("C++ is a high-level", max_length=1000)
 print(generated_text)
 
-perplexity = five_gram_model.perplexity(["Git is a common choice for version control in software development."])
+perplexity = five_gram_model.perplexity(
+    ["C++ is a high-level"])
 print(perplexity)

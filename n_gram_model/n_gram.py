@@ -22,8 +22,8 @@ class NGramLanguageModel:
                 # print(context)
                 self.counts[ngram] += 1
                 self.context_counts[context] += 1
-        print(self.counts)
-        print(self.context_counts)
+        # print(self.counts)
+        # print(self.context_counts)
 
     def score(self, sentence):
         tokens = sentence.split()
