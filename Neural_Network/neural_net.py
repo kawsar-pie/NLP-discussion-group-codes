@@ -2,7 +2,6 @@ import numpy as np
 
 
 class Neural_Net:
-
     def __init__(self):
         self.parameters = {"W": 0, "b": 0}
         self.grads = {}
@@ -30,17 +29,15 @@ class Neural_Net:
         return A
 
     def compute_cost(self, A, Y):
-        m = Y.shape[0]
         cost = np.square(np.subtract(A, Y)).mean()
-
         return cost
 
     def backward_propagation(self, A, X, Y):
         m = X.shape[0]
         Y = Y.reshape(m, 1)
         dZ = A - Y
-        dW = 1/m * np.dot(X.T, dZ)
-        db = 1/m * np.sum(dZ, axis=0, keepdims=True)
+        dW = 2/m * np.dot(X.T, dZ)
+        db = 2/m * np.sum(dZ, axis=0, keepdims=True)
 
         # Print shapes for debugging
         # print("backward_propagation")
